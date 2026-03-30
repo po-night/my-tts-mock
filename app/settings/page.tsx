@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 
+import LogoutButton from "@/components/logout-button";
+
 // 拡張ポイント: メール通知や契約情報を増やす場合はこのページを編集する。
 type MeResponse = {
   user: {
@@ -27,6 +29,11 @@ export default function SettingsPage() {
 
         if (!response.ok) {
           window.location.href = "/login";
+          return;
+        }
+
+        if (data.user.id === "admin") {
+          window.location.href = "/admin";
           return;
         }
 
@@ -78,12 +85,15 @@ export default function SettingsPage() {
             <p className="text-sm font-medium uppercase tracking-[0.25em] text-accent">Settings</p>
             <h1 className="mt-3 text-3xl font-semibold tracking-tight text-foreground">ユーザ設定</h1>
           </div>
-          <Link
-            href="/dashboard"
-            className="rounded-full bg-white px-4 py-2 text-sm font-medium text-foreground ring-1 ring-border transition hover:bg-[#fff5eb]"
-          >
-            ダッシュボードへ
-          </Link>
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href="/dashboard"
+              className="rounded-full bg-white px-4 py-2 text-sm font-medium text-foreground ring-1 ring-border transition hover:bg-[#fff5eb]"
+            >
+              ダッシュボードへ
+            </Link>
+            <LogoutButton className="rounded-full bg-white px-4 py-2 text-sm font-medium text-foreground ring-1 ring-border transition hover:bg-[#fff5eb] disabled:cursor-not-allowed disabled:opacity-70" />
+          </div>
         </div>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">

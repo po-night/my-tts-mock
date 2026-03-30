@@ -44,7 +44,7 @@ export default function LoginPage() {
       }
 
       setMessage(data.message ?? "成功しました。");
-      router.push("/dashboard");
+      router.push(userId === "admin" ? "/admin" : "/dashboard");
       router.refresh();
     } catch {
       setError("通信に失敗しました。");
@@ -64,7 +64,7 @@ export default function LoginPage() {
             ログイン / 新規登録
           </h1>
           <p className="mt-4 max-w-xl text-base leading-7 text-muted">
-            チーム検討用の簡易モックです。新規登録では注文番号の形式だけ確認し、初期残量
+            検討用の簡易モックです。新規登録では注文番号の形式だけ確認し、初期残量
             10000 文字でユーザを作成します。
           </p>
           <div className="mt-10 flex gap-3">
@@ -155,7 +155,7 @@ export default function LoginPage() {
           <h2 className="text-2xl font-semibold tracking-tight text-foreground">使い方</h2>
           <ul className="mt-6 space-y-4 text-sm leading-7 text-muted">
             <li>新規登録では注文番号が 8 桁の数字かを確認します。</li>
-            <li>ログイン成功後はダッシュボードに移動します。</li>
+            <li>一般ユーザはダッシュボード、管理者は管理画面へ移動します。</li>
             <li>管理者アカウントは `admin / admin1234` です。</li>
           </ul>
           <div className="mt-8 rounded-3xl bg-[#f7ede3] p-6">

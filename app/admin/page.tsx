@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 
+import LogoutButton from "@/components/logout-button";
 import { listUsers } from "@/lib/mock-store";
 import { getSessionUserId } from "@/lib/session";
 
@@ -25,12 +26,7 @@ export default async function AdminPage() {
             <p className="text-sm font-medium uppercase tracking-[0.25em] text-accent">Admin</p>
             <h1 className="mt-3 text-3xl font-semibold tracking-tight text-foreground">ユーザ一覧</h1>
           </div>
-          <a
-            href="/dashboard"
-            className="rounded-full bg-white px-4 py-2 text-sm font-medium text-foreground ring-1 ring-border transition hover:bg-[#fff5eb]"
-          >
-            ダッシュボードへ
-          </a>
+          <LogoutButton className="rounded-full bg-white px-4 py-2 text-sm font-medium text-foreground ring-1 ring-border transition hover:bg-[#fff5eb] disabled:cursor-not-allowed disabled:opacity-70" />
         </div>
 
         <div className="mt-8 overflow-hidden rounded-[1.5rem] border border-border bg-white">

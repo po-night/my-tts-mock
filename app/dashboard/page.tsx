@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import LogoutButton from "@/components/logout-button";
+
 // 拡張ポイント: 話者選択や音声パラメータを追加したい場合はこのページを編集する。
 type MeResponse = {
   user: {
@@ -28,6 +30,11 @@ export default function DashboardPage() {
 
         if (!response.ok) {
           window.location.href = "/login";
+          return;
+        }
+
+        if (data.user.id === "admin") {
+          window.location.href = "/admin";
           return;
         }
 
@@ -100,12 +107,7 @@ export default function DashboardPage() {
             >
               設定
             </Link>
-            <Link
-              href="/admin"
-              className="rounded-full bg-white px-4 py-2 font-medium text-foreground ring-1 ring-border transition hover:bg-[#fff5eb]"
-            >
-              管理画面
-            </Link>
+            <LogoutButton className="rounded-full bg-white px-4 py-2 font-medium text-foreground ring-1 ring-border transition hover:bg-[#fff5eb] disabled:cursor-not-allowed disabled:opacity-70" />
           </div>
         </div>
 
